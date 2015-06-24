@@ -1,0 +1,49 @@
+
+formatter = "%{first} %{second} %{third} %{fourth}"
+puts formatter % {first: 1, second: 2, third: 3, fourth: 4}
+
+puts """
+There's something going on here.
+With the three double-quotes.
+We'll be able to type as much as we like.
+Even 4 lines if we want, or 5, or 6.
+"""
+
+print "How old are you? "
+age = gets.chomp
+puts "So, you're #{age} old"
+
+print "Give me a number: "
+number = gets.chomp.to_i
+
+user_name = ARGV.first
+puts "Hi #{user_name}."
+
+prompt = '> '
+puts "Where do you live #{user_name}? ", prompt
+lives = $stdin.gets.chomp
+
+txt = open(filename)
+print txt.read
+
+target = open(filename, 'w')
+target.write(line1)
+target.write("\n")
+target.write(line2)
+target.write("\n")
+target.close
+
+
+def print_two(*args)
+  arg1, arg2 = args
+  puts "arg1: #{arg1}, arg2: #{arg2}"
+end
+
+# ok, that *args is actually pointless, we can just do this
+def print_two_again(arg1, arg2)
+  puts "arg1: #{arg1}, arg2: #{arg2}"
+end
+
+print_two("Zed","Shaw")
+print_two_again("Zed","Shaw")
+
