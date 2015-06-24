@@ -1,4 +1,5 @@
-list = 1..9
+list = Array(1..9)
 
-puts list
+#puts list
 
+list.each {|i|  puts "mv ex#{i}.rb  ex0#{i}.rb" }
