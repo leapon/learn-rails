@@ -2,12 +2,14 @@
 formatter = "%{first} %{second} %{third} %{fourth}"
 puts formatter % {first: 1, second: 2, third: 3, fourth: 4}
 
+
 puts """
 There's something going on here.
 With the three double-quotes.
 We'll be able to type as much as we like.
 Even 4 lines if we want, or 5, or 6.
 """
+
 
 print "How old are you? "
 age = gets.chomp
@@ -16,12 +18,14 @@ puts "So, you're #{age} old"
 print "Give me a number: "
 number = gets.chomp.to_i
 
+
 user_name = ARGV.first
 puts "Hi #{user_name}."
 
 prompt = '> '
 puts "Where do you live #{user_name}? ", prompt
 lives = $stdin.gets.chomp
+
 
 txt = open(filename)
 print txt.read
@@ -46,4 +50,16 @@ end
 
 print_two("Zed","Shaw")
 print_two_again("Zed","Shaw")
+
+
+def secret_formula(started)
+  jelly_beans = started * 500
+  jars = jelly_beans / 1000
+  crates = jars / 100
+  return jelly_beans, jars, crates
+end
+
+start_point = 10000
+beans, jars, crates = secret_formula(start_point)
+
 
