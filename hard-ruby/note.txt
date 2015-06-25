@@ -63,3 +63,21 @@ start_point = 10000
 beans, jars, crates = secret_formula(start_point)
 
 
+the_count = [1, 2, 3, 4, 5]
+for number in the_count
+  puts "This is count #{number}"
+end
+
+fruits = ['apples', 'oranges', 'pears', 'apricots']
+fruits.each do |fruit|
+  puts "A fruit of type: #{fruit}"
+end
+
+change = [1, 'pennies', 2, 'dimes', 3, 'quarters']
+change.each {|i| puts "I got #{i}" }
+
+
+ten_things = "Apples Oranges Crows Telephone Light Sugar"
+stuff = ten_things.split(' ')
+
+
