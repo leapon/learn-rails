@@ -1,1 +1,15 @@
-<h2>Article Page</h2>
+<h2>Listing articles</h2>
+ 
+<table style="border: solid 1px #f2f2f2">
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+  </tr>
+ 
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.text %></td>
+    </tr>
+  <% end %>
+</table>
