@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/auth/google_oauth2/callback' => 'welcome#google_apps_token'
+  get '/auth/google_oauth2/callback2' => 'welcome#google_apps_token2'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
