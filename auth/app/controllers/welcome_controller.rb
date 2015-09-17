@@ -6,18 +6,22 @@ class WelcomeController < ApplicationController
   # Called to receive the token from Google Authentication
   def google_apps_token
     
-    puts '>>> request.env["omniauth.auth"]:', request.env["omniauth.auth"]
+    #puts '>>> request.env["omniauth.auth"]:', request.env["omniauth.auth"]
     puts '>>> callback from google apps params:', params
     
-    omni_params = request.env["omniauth.auth"]
+    omni_auth = request.env['omniauth.auth']
+    
+    puts ">>> omni_auth.uid:", omni_auth.uid
+    puts ">>> omni_auth.provider:", omni_auth.provider
+    puts ">>> omni_auth.info:", omni_auth.info
+    puts ">>> omni_auth.credentials:", omni_auth.credentials
+    puts ">>> omni_auth.extra:", omni_auth.extra
+    
+    omni_params = request.env["omniauth.params"]
+    
     puts ">>> omni_params:", omni_params.to_s
     
-    puts ">>> omni_params.uid:", omni_params.uid
-    puts ">>> omni_params.provider:", omni_params.provider
-    puts ">>> omni_params.info:", omni_params.info
-    puts ">>> omni_params.credentials:", omni_params.credentials
-    puts ">>> omni_params.extra:", omni_params.extra
-    
+    # render webpage
     render :text => 'google apps token'
     
   end
