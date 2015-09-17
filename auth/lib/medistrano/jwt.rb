@@ -24,12 +24,16 @@ module Medistrano
       def from_user(user, role)
         
         puts '>>> from_user:', user, role
-        
         if user[:role] != 'devops' && role == 'devops'
           raise Error.new('User may not assign self additional privileges')
         end
         
-        { 'test' => 'abc' }
+        {
+          'email' => user[:email],
+          'exp' => (Time.now + 1.day).to_i, # TODO: Is this reasonable?
+          'role' => role,
+          'version' => 'n/a'   #user.token_version!(role)
+        }
         
         #self.new({
         #  'email' => user.email,
@@ -38,6 +42,10 @@ module Medistrano
         #  'version' => user.token_version!(role)
         #}, false)
         
+      end
+      
+      def encoded_test(payload)
+        ::JWT.encode(payload, '123456')
       end
       
     end
@@ -59,7 +67,7 @@ module Medistrano
     def encoded
       ::JWT.encode(payload, JWT_SECRET)
     end
-
+    
     def check_expiry!
       raise ::JWT::DecodeError.new('exp is required') unless payload['exp']
       unless payload['exp'].is_a?(Fixnum)
