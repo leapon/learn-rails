@@ -50,13 +50,18 @@ class WelcomeController < ApplicationController
   end
   
   def do_api_call
-    
     puts '>>> do_api_call params:', params
-    
-    #auth_header = params['Authorization']
-    
-    render :text => 'do_api_call'
-    
+    bearer = params['bearer'];
+    puts '>>> bearer:', bearer
+    if bearer
+      jwt = Medistrano::JWT.from_token(bearer)
+      puts '>>> jwt:', jwt
+      user_email = jwt.payload['email']
+      puts '>>> user email:', user_email
+      render :text => user_email
+    else
+      render :text => 'do_api_call'
+    end
   end
   
   def medistrano_api_auth
