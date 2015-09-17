@@ -51,6 +51,11 @@ class WelcomeController < ApplicationController
   
   def test_api_call
     
+     render :text => 'test_api_call'
+  end
+  
+  def medistrano_api_auth
+    
     auth_header = request.headers['Authorization']
     
     if auth_header.downcase.start_with?('bearer')

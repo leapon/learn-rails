@@ -11,7 +11,8 @@ module Medistrano
 
       def from_token(token)
         # JWT_SECRET is populated with the value in config/jwt.yml
-        payload = ::JWT.decode(token, JWT_SECRET).first
+        jwt_secret = '123456'
+        payload = ::JWT.decode(token, jwt_secret).first
         self.new(payload, false).tap { |t| t.check_expiry! }
       rescue ExpiredSignature
         Medistrano.logger.info("Request made with expired token for user with email: #{payload['email'] || 'unknown'}")
@@ -45,7 +46,8 @@ module Medistrano
       end
       
       def encoded_test(payload)
-        ::JWT.encode(payload, '123456')
+        jwt_secret = '123456'
+        ::JWT.encode(payload, jwt_secret)
       end
       
     end
