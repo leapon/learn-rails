@@ -49,9 +49,9 @@ class WelcomeController < ApplicationController
     render :text => 'google apps token2'
   end
   
-  def test_api_call
+  def do_api_call
     
-     render :text => 'test_api_call'
+     render :text => 'do_api_call'
   end
   
   def medistrano_api_auth
