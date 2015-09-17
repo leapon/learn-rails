@@ -51,7 +51,12 @@ class WelcomeController < ApplicationController
   
   def do_api_call
     
-     render :text => 'do_api_call'
+    puts '>>> do_api_call params:', params
+    
+    #auth_header = params['Authorization']
+    
+    render :text => 'do_api_call'
+    
   end
   
   def medistrano_api_auth
