@@ -20,8 +20,10 @@ class ArticlesController < ApplicationController
   end
   
   def create
+    puts '>>> article_params:', article_params
     @article = Article.new(article_params)
-   
+    
+    puts '>>> article:', @article
     @article.save
     redirect_to @article
   end
