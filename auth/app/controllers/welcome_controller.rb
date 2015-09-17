@@ -35,6 +35,7 @@ class WelcomeController < ApplicationController
     
     puts ">>> jwt:", jwt
     puts ">>> jwt_encoded:", jwt_encoded
+    puts ">>> jwt encoded and then multijson.encode:", MultiJson.encode(jwt_encoded)
     render(json: MultiJson.encode(jwt_encoded), status: 200)
     
     # render webpage
@@ -46,6 +47,25 @@ class WelcomeController < ApplicationController
     #puts '>>> request.env["omniauth.auth"]:', request.env["omniauth.auth"]
     #puts '>>> callback from google apps params:', params
     render :text => 'google apps token2'
+  end
+  
+  def test_api_call
+    
+    auth_header = request.headers['Authorization']
+    
+    if auth_header.downcase.start_with?('bearer')
+      jwt = Medistrano::JWT.from_token(auth_header[7..-1] || '')
+      raise Api::V0::ControllerError.new('Token is invalid', 403) if jwt.invalid?
+
+      @current_user = User.find_by_email(jwt.payload['email'])
+      raise Api::V0::ControllerError.new('Token is invalid', 403) if current_user.nil?
+
+      # We use the role specified in the JWT if supplied; devops should be
+      # able to create engineer tokens for themselves in case they want to
+      # restrict their own permissions.
+      current_user.role = jwt.payload['role'] if jwt.payload['role']
+    end
+    
   end
   
 end
