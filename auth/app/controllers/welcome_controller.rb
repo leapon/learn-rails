@@ -29,7 +29,13 @@ class WelcomeController < ApplicationController
     puts ">>> omni_params:", omni_params.to_yaml
     puts ">>> accessToken:", accessToken
     
-    user = { :role => 'devops', :email => 'test@example.com' }
+    user = {
+      :role => 'devops',
+      :name => omni_auth.info.name,
+      :email => omni_auth.info.email
+    }
+    puts ">>> user:", user
+    
     jwt = Medistrano::JWT.from_user(user, user[:role])   #.encoded
     jwt_encoded = Medistrano::JWT.encoded_test(jwt)
     
@@ -37,10 +43,6 @@ class WelcomeController < ApplicationController
     puts ">>> jwt_encoded:", jwt_encoded
     puts ">>> jwt encoded and then multijson.encode:", MultiJson.encode(jwt_encoded)
     render(json: MultiJson.encode(jwt_encoded), status: 200)
-    
-    # render webpage
-    #render :text => 'google apps token'
-    
   end
   
   def google_apps_token2
